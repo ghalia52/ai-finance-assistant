@@ -1,0 +1,818 @@
+/* ===================================
+   TABLE OF CONTENTS
+   ===================================
+   1. CSS Reset & Base Styles
+   2. CSS Custom Properties (Variables)
+   3. Keyframe Animations
+   4. Utility Classes
+   5. Layout Components
+   6. Navigation & Sidebar
+   7. Chat Components
+   8. Interactive Elements
+   9. Responsive Design
+   ===================================
+*/
+
+/* ===================================
+   1. CSS RESET & BASE STYLES
+   =================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ===================================
+   2. CSS CUSTOM PROPERTIES
+   =================================== */
+:root {
+  /* Colors */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-secondary: #10b981;
+  --color-secondary-dark: #059669;
+  --color-accent: #0ea5e9;
+  
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #9ca3af;
+  
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-border: #bbf7d0;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 50%;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-primary: 0 4px 16px rgba(59, 130, 246, 0.2);
+  --shadow-secondary: 0 4px 16px rgba(16, 185, 129, 0.2);
+  
+  /* Layout */
+  --sidebar-width: 320px;
+  --header-height: 80px;
+}
+
+/* ===================================
+   3. KEYFRAME ANIMATIONS
+   =================================== */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(180deg); 
+    opacity: 0.8;
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); 
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); 
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -15px, 0);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -8px, 0);
+  }
+  90% {
+    transform: translate3d(0,-2px,0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===================================
+   4. UTILITY CLASSES
+   =================================== */
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--shadow-sm);
+}
+
+.financial-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Gradient Utilities */
+.wealth-gradient {
+  background: linear-gradient(135deg, #1e40af 0%, var(--color-primary) 50%, var(--color-accent) 100%);
+}
+
+.money-gradient {
+  background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 50%, #34d399 100%);
+}
+
+.text-wealth {
+  background: linear-gradient(135deg, #1e40af 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ===================================
+   5. LAYOUT COMPONENTS
+   =================================== */
+.finance-assistant {
+  min-height: 100vh;
+  background: var(--color-background);
+  position: relative;
+}
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Floating Particles */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--radius-full);
+  opacity: 0.3;
+  box-shadow: 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* ===================================
+   6. NAVIGATION & SIDEBAR
+   =================================== */
+.mobile-menu-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  color: #475569;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-menu-button:hover {
+  background: var(--color-background);
+  color: #334155;
+  box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  flex-shrink: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-content {
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  z-index: 30;
+  backdrop-filter: blur(2px);
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  padding: var(--spacing-2xl);
+  border-bottom: 1px solid var(--color-border-light);
+  background: var(--color-surface);
+}
+
+.bot-avatar {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  animation: pulse 3s infinite;
+  box-shadow: var(--shadow-primary);
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.sidebar-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Sidebar Cards */
+.balance-card {
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: none;
+  box-shadow: 0 8px 24px rgba(30, 41, 59, 0.15);
+  margin: var(--spacing-xl) var(--spacing-2xl);
+}
+
+.balance-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.balance-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.balance-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: var(--spacing-sm);
+}
+
+.balance-change {
+  color: var(--color-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.budgets-card {
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #1e40af 100%);
+  border: none;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+  margin: 0 var(--spacing-2xl) var(--spacing-xl);
+}
+
+.budgets-header {
+  color: white;
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.budgets-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.budget-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(4px);
+}
+
+.budget-category {
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.budget-amount {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.activity-card {
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  background: linear-gradient(135deg, var(--color-secondary-dark) 0%, #047857 100%);
+  border: none;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.15);
+  margin: 0 var(--spacing-2xl) var(--spacing-xl);
+}
+
+.activity-header {
+  color: white;
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  font-size: 14px;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(4px);
+}
+
+.activity-expense {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================================
+   7. CHAT COMPONENTS
+   =================================== */
+.chat-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-xl) var(--spacing-3xl);
+  background: var(--color-surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.chat-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-secondary);
+}
+
+.chat-info h2 {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.chat-info p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+  color: var(--color-success);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-success);
+  border-radius: var(--radius-full);
+  animation: pulse 2s infinite;
+}
+
+.status-text {
+  color: var(--color-success);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Messages */
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+  background: var(--color-background);
+}
+
+.message-wrapper {
+  display: flex;
+  animation: slide-in-from-bottom 0.4s ease-out;
+}
+
+.message-wrapper.user {
+  justify-content: flex-end;
+}
+
+.message-wrapper.assistant {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 70%;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+.message-content.user {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+}
+
+.message-bubble {
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.message-bubble.user {
+  color: white;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-bottom-right-radius: var(--spacing-xs);
+  box-shadow: var(--shadow-primary);
+}
+
+.message-bubble.assistant {
+  color: #374151;
+  background: var(--color-surface);
+  border: 1px solid #e5e7eb;
+  border-bottom-left-radius: var(--spacing-xs);
+  box-shadow: var(--shadow-sm);
+}
+
+.message-text {
+  word-wrap: break-word;
+}
+
+.message-time {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: var(--spacing-sm);
+  font-weight: 400;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.loading-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--color-text-muted);
+  border-radius: var(--radius-full);
+  animation: bounce 1.5s infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ===================================
+   8. INTERACTIVE ELEMENTS
+   =================================== */
+.quick-actions {
+  padding: var(--spacing-lg) var(--spacing-3xl) var(--spacing-2xl);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.quick-actions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.quick-action-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: #374151;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.quick-action-button:hover {
+  background: var(--color-background);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Input Area */
+.input-area {
+  padding: var(--spacing-2xl) var(--spacing-3xl);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.message-input {
+  width: 100%;
+  padding: var(--spacing-lg) 60px var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: #fafbfc;
+  color: var(--color-text-primary);
+  resize: none;
+  outline: none;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message-input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.message-input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.message-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-button {
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  border-radius: var(--radius-md);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-primary);
+}
+
+.send-button:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===================================
+   9. RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 1023px) {
+  .main-layout {
+    position: relative;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 40;
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    position: relative;
+    transform: translateX(0) !important;
+  }
+  
+  .mobile-menu-button {
+    display: none;
+  }
+  
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .message-content {
+    max-width: 85%;
+  }
+  
+  .status-indicator {
+    display: none;
+  }
+  
+  .messages-container {
+    padding: var(--spacing-xl);
+    gap: var(--spacing-lg);
+  }
+  
+  .chat-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+  
+  .input-area {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+  
+  .quick-actions {
+    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-lg);
+  }
+}
